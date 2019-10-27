@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="en">
+	<meta charset="utf-8">
+	<title>IBM Watson Machine Learning application</title>
+
+	<head>
+		<!-- bootstrap -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+		<!-- angular -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.10/angular.js" integrity="sha256-jSoVBO61m37PQcQB9y2Lx2K9YYBGz9Bnq0UQ3t95ywI=" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/0.11.0/ui-bootstrap-tpls.js" integrity="sha256-iofWJlv1W6H0NFMcXvnwN1VgvJejFa8tqqyS1LKLozM=" crossorigin="anonymous"></script>
+
+		<!-- local -->
+		<script src="js/app.js" type="text/javascript" ></script>
+		<script src="js/srv.js" type="text/javascript" ></script>
+	</head>
+
+<body ng-app="bdadaysPMTester" ng-controller="AppCtrl" >
+	<div class="container">
+
+		<h1 class="text-center">Predicting Income Potential <small>By Bassel</small></h1><br>
+		<form name='scoreForm' novalidate>
+			<div class="section">
+			
+				<div class="form-group">
+					<label for="age">Age</label>
+					<input type="text" class="form-control" name="age" id="age"
+							required
+							ng-model="p.age">
+					<div ng-show='scoreForm.age.$error.required' class="alert alert-danger">
+						Age is required
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="workclass">Work Class</label>
+					<select class="form-control" name="workclass" id="workclass"
+							required
+							ng-model="p.workclass">
+						<option value="local-gov">local-gov</option>
+						<option value="never-worked">never-worked</option>
+						<option value="private">private</option>
+						<option value="self-emp-inc">self-emp-inc</option>
+						<option value="self-emp-not-inc">self-emp-not-inc</option>
+						<option value="state-gov">state-gov</option>
+						<option value="federal-gov">federal-gov</option>
+						<option value="without-pay">without-pay</option>
+						<option value="other_unknown">other_unknown</option>
+					</select>
+				</div>
+				
+				<div class="form-group">
+					<label for="final_weight">Final Weight</label>
+					<input type="text" class="form-control" name="final_weight" id="final_weight"
+							required
+							ng-model="p.final_weight">
+					<div ng-show='scoreForm.final_weight.$error.required' class="alert alert-danger">
+						Final Weight Class is required
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="education_duration">Education Duration</label>
+					<select class="form-control" name="education_duration" id="education_duration"
+							required
+							ng-model="p.education_duration">
+						<option value="5">5</option>
+						<option value="6">6</option>
+						<option value="7">7</option>
+						<option value="8">8</option>
+						<option value="9">9</option>
+						<option value="10">10</option>
+						<option value="11">11</option>
+						<option value="12">12</option>
+						<option value="13">13</option>
+						<option value="14">14</option>
+						<option value="15">15</option>
+					</select>
+				</div>
+				
+				<div class="form-group">
+					<label for="marital_status">Marital Status</label>
+					<select class="form-control" name="marital_status" id="marital_status"
+							required
+							ng-model="p.marital_status">
+						<option value="never-married">never-married</option>
+						<option value="married-civ-spouse">married-civ-spouse</option>
+						<option value="separated">separated</option>
+						<option value="widowed">widowed</option>
+						<option value="divorced">divorced</option>
+						<option value="married-spouse-absent">married-spouse-absent</option>
+						<option value="married-af-spouse">married-af-spouse</option>
+					</select>
+				</div>
+				
+				<div class="form-group">
+					<label for="occupation">Occupation</label>
+					<select class="form-control" name="occupation" id="occupation"
+							required
+							ng-model="p.occupation">
+						<option value="other-service">other-service</option>
+						<option value="protective-serv">protective-serv</option>
+						<option value="prof-specialty">prof-specialty</option>
+						<option value="sales">sales</option>
+						<option value="craft-repair">craft-repair</option>
+						<option value="other_unknown">other_unknown</option>
+						<option value="exec-managerial">exec-managerial</option>
+						<option value="handlers-cleaners">handlers-cleaners</option>
+						<option value="farming-fishing">farming-fishing</option>
+						<option value="adm-clerical">adm-clerical</option>
+						<option value="priv-house-serv">priv-house-serv</option>
+						<option value="machine-op-inspct">machine-op-inspct</option>
+						<option value="transport-moving">transport-moving</option>
+						<option value="tech-support">tech-support</option>
+						<option value="armed-forces">armed-forces</option>
+					</select>
+				</div>
+				
+				<div class="form-group">
+					<label for="relationship">Relationship</label>
+					<select class="form-control" name="relationship" id="relationship"
+							required
+							ng-model="p.relationship">
+						<option value="own-child">own-child</option>
+						<option value="other-relative">other-relative</option>
+						<option value="not-in-family">not-in-family</option>
+						<option value="unmarried">unmarried</option>
+						<option value="husband">husband</option>
+						<option value="wife">wife</option>
+					</select>
+				</div>
+				
+				<div class="form-group">
+					<label for="race">Race</label>
+					<select class="form-control" name="race" id="race"
+							required
+							ng-model="p.race">
+						<option value="black">black</option>
+						<option value="white">white</option>
+						<option value="asian-pac-islander">asian-pac-islander</option>
+						<option value="amer-indian-eskimo">amer-indian-eskimo</option>
+						<option value="other">other</option>
+					</select>
+				</div>
+				
+				<div class="form-group">
+					<label for="com_native_country">Country</label>
+					<select class="form-control" name="com_native_country" id="com_native_country"
+							required
+							ng-model="p.com_native_country">
+						<option value="aisa">aisa</option>
+						<option value="europe">europe</option>
+						<option value="north_america">north_america</option>
+						<option value="south_america">south_america</option>
+						<option value="other">other</option>
+					</select>
+				</div>
+								
+				<div class="form-group">
+					<label for="sex">Gender</label>
+					<select class="form-control" name="sex" id="sex"
+							required
+							ng-model="p.sex">
+						<option value="male">Male</option>
+						<option value="female">Female</option>
+					</select>
+				</div>
+				
+				<div class="form-group">
+					<label for="capital_gain">Capital Gain</label>
+					<input type="text" class="form-control" name="capital_gain" id="capital_gain"
+							required
+							ng-model="p.capital_gain">
+					<div ng-show='scoreForm.capital_gain.$error.required' class="alert alert-danger">
+						capital_gain is required
+					</div>
+				</div>
+				
+				<div class="form-group">
+					<label for="capital_loss">Capital Loss</label>
+					<input type="text" class="form-control" name="capital_loss" id="capital_loss"
+							required
+							ng-model="p.capital_loss">
+					<div ng-show='scoreForm.capital_loss.$error.required' class="alert alert-danger">
+						capital_loss is required
+					</div>
+				</div>
+
+				<div class="form-group">
+					<label for="hours_per_week">Hours per Week</label>
+					<input type="text" class="form-control" name="hours_per_week" id="hours_per_week"
+							required
+							ng-model="p.hours_per_week">
+					<div ng-show='scoreForm.hours_per_week.$error.required' class="alert alert-danger">
+						hours_per_week is required
+					</div>
+				</div>
+			</div>
+			<div class="section">
+				<button type="button" ng-disabled="scoreForm.$invalid" class="btn btn-success" ng-click="score()"><i class="glyphicon glyphicon-cloud-upload"></i>&nbsp;Score Now&nbsp;</button>
+			</div>
+		</form>
+	</div>
+
+</body>
+
+</html>

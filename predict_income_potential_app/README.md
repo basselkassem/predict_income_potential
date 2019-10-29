@@ -17,8 +17,6 @@ This code pattern can be thought of as two distinct parts:
 7. A Node.js web app is deployed on IBM Cloud, it calls the predictive model hosted on the Watson Machine Learning service.
 8. A user visits the web app, enters their information, and the predictive model returns a response.
 
-!["architecture diagram"](doc/source/images/architecture.png)
-
 ## Included components
 
 * [IBM Watson Studio](https://www.ibm.com/cloud/watson-studio): Analyze data using Jupyter, and Python in a configured, collaborative environment that includes IBM value-adds, such as managed Spark.
